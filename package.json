@@ -1,0 +1,35 @@
+{
+  "name": "html-form-to-node",
+  "version": "1.0.0",
+  "description": "Small Web Application that sends files from an HTML form to a NodeJS server.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MickStick/HTML-Form-to-Node.git"
+  },
+  "keywords": [
+    "NodeJs",
+    "Express",
+    "EJS",
+    "JavaScript",
+    "HTML",
+    "Files",
+    "Forms"
+  ],
+  "author": "Mikhail Rene Shaw",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MickStick/HTML-Form-to-Node/issues"
+  },
+  "homepage": "https://github.com/MickStick/HTML-Form-to-Node#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "formidable": "^1.1.1",
+    "path": "^0.12.7"
+  }
+}
