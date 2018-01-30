@@ -51,7 +51,6 @@ app.get('*', function(req, res, next) {
 app.post('/upload', urlcp, (req, res) => {
     const form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
-        console.log(files);
         const oldpath = files.file.path;
         const newpath = path.join(__dirname, 'public/Static/') + files.file.name;
         fs.rename(oldpath, newpath, function(err) {
