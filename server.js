@@ -56,8 +56,11 @@ app.post('/upload', urlcp, (req, res) => {
         fs.rename(oldpath, newpath, function(err) {
             if (err) throw err;
             console.log(files.file.name + " saved..");
-            res.render('upload', { message: files.file.name + " saved.." });
+            res.json({ message: files.file.name + " saved.." });
         });
+        /*console.log(fields);
+        console.log(req.header('Content-Type'));
+        res.json({ "file": files.file });*/
     });
 });
 

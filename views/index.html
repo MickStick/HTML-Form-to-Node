@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HTML Files to Node</title>
-    <link rel="stylesheet" href="/public/Style/Style.css">
+    <link rel="stylesheet" href="public/Style/Style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-    <script src="/public/Script/Script.js"></script>
+    <script src="public/Script/Script.js" language="javascript"></script>
 </head>
 <body>
     <br><br>
     <div class="container">
-        <div class="container">
-            <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="container" id="upload">
+            <form action="/upload" method="post" id="fileForm" enctype="multipart/form-data">
                 <h1 class="center">Please Upload A File</h1>
                 <br>
                 <div class="file-field input-field">
@@ -28,10 +28,54 @@
                         <input class="file-path validate" type="text">
                     </div>
                 </div>
-                <button class="btn right">Send <i class="material-icons">send</i></button>
+                <button class="btn-large right" id="sendBtn">Send <i class="material-icons">send</i></button>
             </form>
+        </div>
+        <div class="container" id="afterUpload" hidden>
+            <h1 class="center">Message</h1>
+            <h3 class="center" id="message"></h3>
+            <a href="/" class="btn-large right">HOME <i class="material-icons">home</i></a>
         </div>
     </div>
     
 </body>
+<script language="javascript">
+    (function(){
+        document.getElementById("sendBtn").addEventListener("click", function(e){
+            e.preventDefault();
+            const btn = this;
+            const form = document.getElementById("fileForm");
+            const file = document.querySelectorAll('[name="file"]');
+            let formData = new FormData();
+            console.log(file[0].files[0]);
+            formData.append('file', file[0].files[0]);
+
+            fetch('http://mik:8080/upload', {
+                method: 'POST',
+                /*headers: {
+                    "Content-Type": "application/json"
+                },*/
+                body: formData//JSON.stringify({file: file[0].files[0].name})//({text:"This is text" })//
+            })
+            .then(response => response.json())
+            .then(function(response){
+                document.getElementById("upload").setAttribute("hidden", "true");
+                let msgCont =  document.getElementById("afterUpload")
+                msgCont.removeAttribute("hidden");
+                document.getElementById("message").innerHTML = response.message;
+            })//(response => console.log('Success:', response))
+            .catch(error => console.error('Error:', error));
+            /*let xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://mik:8080/upload", true);
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    console.log(this.responseText);
+                }
+            }
+
+            xhr.send(formData);*/
+            
+        });
+    })();
+</script>
 </html>
