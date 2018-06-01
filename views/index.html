@@ -50,7 +50,7 @@
             console.log(file[0].files[0]);
             formData.append('file', file[0].files[0]);
 
-            fetch('http://mik:8080/upload', {
+            fetch('http://localhost:8080/upload', {
                 method: 'POST',
                 /*headers: {
                     "Content-Type": "application/json"
